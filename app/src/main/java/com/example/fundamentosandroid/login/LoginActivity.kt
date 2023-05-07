@@ -14,7 +14,7 @@ import kotlinx.coroutines.launch
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var binding: LoginMainBinding
-    val viewModel: LoginViewModel by viewModels()
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,19 +26,18 @@ class LoginActivity : AppCompatActivity() {
                 when (it){
                     is LoginViewModel.UiState.OnTokenReceived -> saveToken(it.token)
                     is LoginViewModel.UiState.Idle -> Unit
-                    is LoginViewModel.UiState.Error -> saveToken("")//showError(viewModel.uiState.value.toString())
-                    else -> Unit
+                    is LoginViewModel.UiState.Error -> showError(viewModel.uiState.value.toString())
                 }
             }
         }
 
         binding.buttonLogin.setOnClickListener {
-            trylogin()
+            tryLogin()
         }
     }
 
     private fun showError(error: String) {
-        Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "$error", Toast.LENGTH_SHORT).show()
     }
 
     private fun saveToken(token: String){
@@ -56,12 +55,9 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    private fun trylogin(){
+    private fun tryLogin(){
         val email = binding.editTextTextEmailAddress2.text.trim().toString()
         val password = binding.editTextTextPassword2.text.trim().toString()
         viewModel.login(email, password)
     }
-
-    //Retrieve
-
 }

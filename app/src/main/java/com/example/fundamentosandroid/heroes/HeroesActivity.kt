@@ -22,7 +22,7 @@ class HeroesActivity : AppCompatActivity(), Clicked {
         super.onCreate(savedInstanceState)
         binding = ActivityHeroesBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        viewModel.token = getToken()
         lifecycleScope.launch{
             viewModel.uiState.collect{
                 when (it){
@@ -64,9 +64,9 @@ class HeroesActivity : AppCompatActivity(), Clicked {
             .replace(binding.fFragment.id, HeroDetailFragment(this))
             .commitNow()
     }
-    private fun getToken() {
+    private fun getToken(): String {
         getPreferences(Context.MODE_PRIVATE).apply {
-            getString("Token", "").toString()
+            return getString("Token", "").toString()
         }
     }
 }
