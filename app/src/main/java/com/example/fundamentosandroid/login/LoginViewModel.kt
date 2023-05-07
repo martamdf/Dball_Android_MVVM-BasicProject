@@ -16,6 +16,7 @@ class LoginViewModel : ViewModel() {
     private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
     val uiState : StateFlow<UiState> = _uiState
     val BASE_URL = "https://dragonball.keepcoding.education/api/"
+    var token: String = ""
     init {
 
     }
@@ -28,7 +29,7 @@ class LoginViewModel : ViewModel() {
                 .build()
             val request = Request.Builder()
                 .url(url)
-                .addHeader("Authorization", credentials)
+                .addHeader("Authorization", "$credentials")
                 .post(formBody)
                 .build()
             val call = client.newCall(request)
@@ -36,17 +37,15 @@ class LoginViewModel : ViewModel() {
 
             if (response.code == 200){
                 response.body?.let { responseBody ->
-                    val token = responseBody.toString()
                     try {
-                        _uiState.value = UiState.OnTokenReceived(token)
+                        val token = responseBody.string()
+                        _uiState.value = UiState.OnTokenReceived(responseBody.toString())
                     } catch(ex: Exception ) {
                         _uiState.value = UiState.Error("Something went wrong in the response")
                     }
                 } ?: run { _uiState.value = UiState.Error("Something went wrong in the request") }
             }
             else {
-                response.body?.let { responseBody ->
-                    val token = responseBody.toString()}
                 _uiState.value = UiState.Error("Error en usuario o contraseña")
             }
         }

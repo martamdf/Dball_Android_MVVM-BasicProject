@@ -45,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
             putString("Email", binding.editTextTextEmailAddress2.text.trim().toString())
             putString("Password", binding.editTextTextPassword2.text.trim().toString())
             putString("Token", token)
+
             apply()
         }
         launchActivity()

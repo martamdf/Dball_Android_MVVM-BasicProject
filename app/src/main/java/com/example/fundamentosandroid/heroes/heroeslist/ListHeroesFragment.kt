@@ -13,7 +13,7 @@ import com.example.fundamentosandroid.datafiles.Hero
 
 
 interface Clicked {
-    fun onClick()//hero: Hero)
+    fun onClick()
     fun goBack()
 }
 class ListHeroesFragment(val callback: Clicked): Fragment(), HeroClicked {

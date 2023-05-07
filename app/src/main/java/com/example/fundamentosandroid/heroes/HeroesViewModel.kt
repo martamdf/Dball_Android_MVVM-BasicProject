@@ -18,7 +18,7 @@ class HeroesViewModel: ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState>(UiState.Idle)
     val uiState : StateFlow<UiState> = _uiState
-    var token = "//eyJhbGciOiJIUzI1NiIsImtpZCI6InByaXZhdGUiLCJ0eXAiOiJKV1QifQ.eyJlbWFpbCI6Im1hcnRhLm1hcXVlZGFub0BnbWFpbC5lcyIsImlkZW50aWZ5IjoiNUJBNDA1N0EtMDhCMi00NkYzLTk0NUEtQzIwMUVFOEZEOUQ4IiwiZXhwaXJhdGlvbiI6NjQwOTIyMTEyMDB9._Pnu84PfFsTcJMzb5AoKC42sWbcULIKauWHbtebc81E"
+    var token :String = "eyJhbGciOiJIUzI1NiIsImtpZCI6InByaXZhdGUiLCJ0eXAiOiJKV1QifQ.eyJlbWFpbCI6Im1hcnRhLm1hcXVlZGFub0BnbWFpbC5lcyIsImlkZW50aWZ5IjoiNUJBNDA1N0EtMDhCMi00NkYzLTk0NUEtQzIwMUVFOEZEOUQ4IiwiZXhwaXJhdGlvbiI6NjQwOTIyMTEyMDB9._Pnu84PfFsTcJMzb5AoKC42sWbcULIKauWHbtebc81E"
     var list : List<Hero> = listOf()
     lateinit var hero : Hero
 
